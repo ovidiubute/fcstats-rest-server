@@ -1,0 +1,18 @@
+{
+  "name": "fcstats-rest-server",
+  "version": "1.0.0",
+  "description": "fcstats rest-server module",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "private": true,
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "author": "Ovidiu Bute <ovidiu.bute@gmail.com> (http://ovidiubute.com)",
+  "license": "ISC",
+  "dependencies": {
+    "restify": "^4.0.4"
+  }
+}

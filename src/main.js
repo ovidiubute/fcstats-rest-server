@@ -11,8 +11,6 @@ server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
 
-server.opts( /.*/, ( req, res ) => res.send( 204 ) )
-
 server.get('/api/matches/:leagueName/:seasonYear', function (req, res, next) {
 
   MatchEntity

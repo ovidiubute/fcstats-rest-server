@@ -8,13 +8,9 @@ var server = restify.createServer({
   version: '1.0.0'
 });
 server.use(restify.acceptParser(server.acceptable));
-server.use(
-  function crossOrigin(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    return next();
-  }
-);
+server.use(restify.CORS({
+  origins: ['https://footballstats.oviprojects.xyz', 'http://footballstats.oviprojects.xyz']
+}));
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
 

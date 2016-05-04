@@ -8,27 +8,6 @@ var server = restify.createServer({
   version: '1.0.0'
 });
 server.use(restify.acceptParser(server.acceptable));
-server.use(restify.CORS({
-  origins: ['https://footballstats.oviprojects.xyz', 'http://footballstats.oviprojects.xyz'],
-  headers: [
-    "authorization",
-    "withcredentials",
-    "x-requested-with",
-    "x-forwarded-for",
-    "x-real-ip",
-    "x-customheader",
-    "user-agent",
-    "keep-alive",
-    "host",
-    "accept",
-    "connection",
-    "upgrade",
-    "content-type",
-    "dnt",
-    "if-modified-since",
-    "cache-control"
-  ]
-}));
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
 

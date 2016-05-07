@@ -1,6 +1,6 @@
 {
   "name": "fcstats-rest-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "fcstats rest-server module",
   "main": "index.js",
   "directories": {

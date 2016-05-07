@@ -20,20 +20,20 @@ server.use(restify.bodyParser());
 
 server.get('/api/matches/:leagueName/:seasonYear', function (req, res, next) {
 
-  MatchEntity
-    .scan()
-    .filterExpression('#s.yearStart = :y1 AND #s.yearEnd = :y2 AND #s.leagueName = :lg')
-    .expressionAttributeNames({
-      "#s": "season"
-    })
-    .expressionAttributeValues({
-      ':y1': parseInt(req.params.seasonYear),
-      ':y2': parseInt(req.params.seasonYear) + 1,
-      ':lg': req.params.leagueName
-    })
-    .exec(function (err, result) {
-      res.send(result.Items)
-    });
+  // MatchEntity
+  //   .scan()
+  //   .filterExpression('#s.yearStart = :y1 AND #s.yearEnd = :y2 AND #s.leagueName = :lg')
+  //   .expressionAttributeNames({
+  //     "#s": "season"
+  //   })
+  //   .expressionAttributeValues({
+  //     ':y1': parseInt(req.params.seasonYear),
+  //     ':y2': parseInt(req.params.seasonYear) + 1,
+  //     ':lg': req.params.leagueName
+  //   })
+  //   .exec(function (err, result) {
+  //     res.send(result.Items)
+  //   });
 
   return next();
 });

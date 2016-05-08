@@ -1,11 +1,8 @@
 {
   "name": "fcstats-rest-server",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "fcstats rest-server module",
-  "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
+  "main": "src/main.js",
   "private": true,
   "scripts": {
     "test": "mocha -R spec"
@@ -13,7 +10,7 @@
   "author": "Ovidiu Bute <ovidiu.bute@gmail.com> (http://ovidiubute.com)",
   "license": "ISC",
   "dependencies": {
-    "restify": "^4.0.4",
+    "restify": "4.0.4",
     "fcstats-persistence": "ovidiubute/fcstats-persistence",
     "fcstats-dbimporter": "ovidiubute/fcstats-dbimporter"
   }

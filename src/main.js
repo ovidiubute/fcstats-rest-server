@@ -1,35 +1,29 @@
 "use strict";
 
-var restify = require('restify');
-var MatchEntity = require('fcstats-persistence').models.match;
+const restify = require('restify');
+const Match = require('fcstats-persistence').Match;
+const persistence = require('fcstats-persistence').lib;
 
-var server = restify.createServer({
+let db;
+persistence.loadDatabase('./node_modules/fcstats-dbimporter/out/fcstats0_4.json').then((database) => {
+  db = database;
+});
+
+const server = restify.createServer({
   name: 'fcstats-rest-server',
-  version: '1.0.0'
+  version: '2.0.0'
 });
 server.use(restify.acceptParser(server.acceptable));
-server.use(restify.CORS({
-  origins: ['https://footballstats.oviprojects.xyz', 'http://footballstats.oviprojects.xyz']
-}));
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
 
 server.get('/api/matches/:leagueName/:seasonYear', function (req, res, next) {
+  const year = Number.parseInt(req.params.seasonYear);
+  const league = req.params.leagueName;
 
-  MatchEntity
-    .scan()
-    .filterExpression('#s.yearStart = :y1 AND #s.yearEnd = :y2 AND #s.leagueName = :lg')
-    .expressionAttributeNames({
-      "#s": "season"
-    })
-    .expressionAttributeValues({
-      ':y1': parseInt(req.params.seasonYear),
-      ':y2': parseInt(req.params.seasonYear) + 1,
-      ':lg': req.params.leagueName
-    })
-    .exec(function (err, result) {
-      res.send(result.Items)
-    });
+  const matches = Match.get(persistence.getTable(db, 'matches')).findByYearAndLeague(year, league);
+
+  res.send(matches);
 
   return next();
 });

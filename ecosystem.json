@@ -1,0 +1,25 @@
+{
+  "apps" : [
+    {
+      "name"           : "fcstats-rest-server",
+      "script"         : "index.js",
+      "env"            : {},
+      "env_production" : {
+        "NODE_ENV": "production"
+      }
+    }
+  ],
+
+  "deploy" : {
+    "production" : {
+      "user"        : "fcstats",
+      "host"        : "159.203.152.181",
+      "key"         : "./deploy-key",
+      "ref"         : "origin/master",
+      "repo"        : "git@github.com:ovidiubute/fcstats-rest-server.git",
+      "path"        : "/home/fcstats/fcstatsbck/fcstats-rest-server",
+      "post-deploy" : "rm -rf node_modules/* && npm install && pm2 startOrRestart ecosystem.json --env production"
+    }
+  }
+}
+

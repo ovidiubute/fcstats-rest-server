@@ -15,6 +15,7 @@
     "fcstats-dbimporter": "ovidiubute/fcstats-dbimporter"
   },
   "devDependencies": {
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "pm2": "^1.1.3"
   }
 }

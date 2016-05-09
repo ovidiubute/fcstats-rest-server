@@ -13,5 +13,8 @@
     "restify": "4.0.4",
     "fcstats-persistence": "ovidiubute/fcstats-persistence",
     "fcstats-dbimporter": "ovidiubute/fcstats-dbimporter"
+  },
+  "devDependencies": {
+    "mocha": "^2.4.5"
   }
 }

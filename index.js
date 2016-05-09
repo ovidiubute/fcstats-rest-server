@@ -2,16 +2,17 @@
 
 const restify = require('restify');
 const Match = require('fcstats-persistence').Match;
+const Season = require('fcstats-persistence').Season;
 const persistence = require('fcstats-persistence').lib;
 
 let db;
-persistence.loadDatabase('./node_modules/fcstats-dbimporter/out/fcstats0_4.json').then((database) => {
+persistence.loadDatabase('./node_modules/fcstats-dbimporter/out/fcstats0_5.json').then((database) => {
   db = database;
 });
 
 const server = restify.createServer({
   name: 'fcstats-rest-server',
-  version: '2.0.0'
+  version: '3.0.0'
 });
 server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
@@ -24,6 +25,16 @@ server.get('/api/matches/:leagueName/:seasonYear', function (req, res, next) {
   const matches = Match.get(persistence.getTable(db, 'matches')).findByYearAndLeague(year, league);
 
   res.send(matches);
+
+  return next();
+});
+
+server.get('/api/seasons/:leagueName', (req, res, next) => {
+  const league = req.params.leagueName;
+
+  const seasons = Season.get(persistence.getTable(db, 'matches')).findByLeague(league);
+
+  res.send(seasons);
 
   return next();
 });

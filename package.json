@@ -1,6 +1,6 @@
 {
   "name": "fcstats-rest-server",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "fcstats rest-server module",
   "main": "index.js",
   "private": true,
@@ -10,7 +10,7 @@
   "author": "Ovidiu Bute <ovidiu.bute@gmail.com> (http://ovidiubute.com)",
   "license": "ISC",
   "dependencies": {
-    "express-validator": "^2.20.5",
+    "express-validator": "2.20.5",
     "fcstats-dbimporter": "ovidiubute/fcstats-dbimporter",
     "fcstats-persistence": "ovidiubute/fcstats-persistence",
     "restify": "4.0.4"

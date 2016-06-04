@@ -19,7 +19,7 @@
       "ref"         : "origin/master",
       "repo"        : "https://github.com/ovidiubute/fcstats-rest-server.git",
       "path"        : "/home/fcstats/fcstatsbck/fcstats-rest-server",
-      "post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env production"
+      "post-deploy" : "pm2 startOrRestart ecosystem.json --env production"
     }
   }
 }

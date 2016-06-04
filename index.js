@@ -52,7 +52,7 @@ server.post('/api/feedback', function (req, res, next) {
   if (errors){
     res.send(400);
   } else {
-    fs.appendFile('/home/fcstats/feedback.txt', 'email=' + req.params.email + ', body='+ req.params.body + '\\r\\n', 'utf8', (err) => {
+    fs.appendFile('/home/fcstats/feedback.txt', 'email=' + req.params.email + ', body='+ req.params.body + '\r\n', 'utf8', (err) => {
       if (err) {
         console.log('Failed to save feedback, err=' + err);
       } else {

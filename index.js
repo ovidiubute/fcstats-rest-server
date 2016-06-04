@@ -42,7 +42,7 @@ server.get('/api/matches/:leagueName/:seasonYear', function (req, res, next) {
   return next();
 });
 
-server.post('/feedback', function (req, res, next) {
+server.post('/api/feedback', function (req, res, next) {
   req.assert('email', 'valid email required').isEmail();
   req.sanitize('body').escape().trim();
   req.assert('body').notEmpty();

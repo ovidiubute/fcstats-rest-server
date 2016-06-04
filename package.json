@@ -10,9 +10,10 @@
   "author": "Ovidiu Bute <ovidiu.bute@gmail.com> (http://ovidiubute.com)",
   "license": "ISC",
   "dependencies": {
-    "restify": "4.0.4",
+    "express-validator": "^2.20.5",
+    "fcstats-dbimporter": "ovidiubute/fcstats-dbimporter",
     "fcstats-persistence": "ovidiubute/fcstats-persistence",
-    "fcstats-dbimporter": "ovidiubute/fcstats-dbimporter"
+    "restify": "4.0.4"
   },
   "devDependencies": {
     "mocha": "^2.4.5",

@@ -1,6 +1,9 @@
 "use strict";
 
 const restify = require('restify');
+const expressValidator = require('express-validator');
+const fs = require('fs');
+
 const Match = require('fcstats-persistence').Match;
 const Season = require('fcstats-persistence').Season;
 const persistence = require('fcstats-persistence').lib;
@@ -15,8 +18,18 @@ const server = restify.createServer({
   version: '3.0.0'
 });
 server.use(restify.acceptParser(server.acceptable));
+if (process.env !== 'production') {
+  server.use(
+    function crossOrigin(req, res, next) {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers", "X-Requested-With");
+      return next();
+    }
+  );
+}
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
+server.use(expressValidator());
 
 server.get('/api/matches/:leagueName/:seasonYear', function (req, res, next) {
   const year = Number.parseInt(req.params.seasonYear);
@@ -28,6 +41,29 @@ server.get('/api/matches/:leagueName/:seasonYear', function (req, res, next) {
 
   return next();
 });
+
+server.post('/feedback', function (req, res, next) {
+  req.assert('email', 'valid email required').isEmail();
+  req.sanitize('body').escape().trim();
+  req.assert('body').notEmpty();
+
+  var errors = req.validationErrors(true);
+
+  if (errors){
+    res.send(400);
+  } else {
+    fs.appendFile('/home/feedback.txt', 'email=' + req.params.email + ', body='+ req.params.body + '\\r\\n', 'utf8', (err) => {
+      if (err) {
+        console.log('Failed to save feedback, err=' + err);
+      } else {
+        console.log('New feedback from ' + req.params.email);
+      };
+    });
+
+    res.send(200);
+    next();
+  }
+})
 
 server.get('/api/seasons/:leagueName', (req, res, next) => {
   const league = req.params.leagueName;
